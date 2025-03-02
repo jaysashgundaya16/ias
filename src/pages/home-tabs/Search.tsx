@@ -19,7 +19,7 @@ const Search: React.FC = () => {
                             <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                         </IonAvatar>
                         <IonLabel>
-                            <h2>Connor Smith</h2>
+                            <h2>Christian Lee</h2>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
@@ -27,7 +27,7 @@ const Search: React.FC = () => {
                             <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                         </IonAvatar>
                         <IonLabel>
-                            <h2>Daniel Smith</h2>
+                            <h2>James Gonzaga</h2>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
@@ -35,7 +35,7 @@ const Search: React.FC = () => {
                             <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                         </IonAvatar>
                         <IonLabel>
-                            <h2>Greg Smith</h2>
+                            <h2>Jeff Dela Cruz</h2>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
@@ -43,7 +43,34 @@ const Search: React.FC = () => {
                             <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                         </IonAvatar>
                         <IonLabel>
-                            <h2>Zoey Smith</h2>
+                            <h2>Brian Shaw</h2>
+                        </IonLabel>
+                    </IonItem>
+
+                    <IonItem>
+                        <IonAvatar slot="start">
+                            <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </IonAvatar>
+                        <IonLabel>
+                            <h2>April Lee Joy</h2>
+                        </IonLabel>
+                    </IonItem>
+
+                    <IonItem>
+                        <IonAvatar slot="start">
+                            <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </IonAvatar>
+                        <IonLabel>
+                            <h2>Will Smith</h2>
+                        </IonLabel>
+                    </IonItem>
+
+                    <IonItem>
+                        <IonAvatar slot="start">
+                            <IonImg src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                        </IonAvatar>
+                        <IonLabel>
+                            <h2>Taylor Swift</h2>
                         </IonLabel>
                     </IonItem>
                     
