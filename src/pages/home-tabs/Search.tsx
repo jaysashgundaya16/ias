@@ -1,4 +1,4 @@
-import { IonAvatar, IonButtons, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButtons, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar, } from '@ionic/react';
 
 const Search: React.FC = () => {
     return (
@@ -46,6 +46,7 @@ const Search: React.FC = () => {
                             <h2>Zoey Smith</h2>
                         </IonLabel>
                     </IonItem>
+                    
                 </IonList>
             </IonContent>
         </IonPage>
