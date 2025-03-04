@@ -1,0 +1,48 @@
+.profile-content .profile-box {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack items vertically */
+    height: 100vh; /* Use viewport height for full screen */
+    padding: 20px; /* Add padding around the content */
+  }
+  
+  .profile-box {
+    background-color: rgb(5, 5, 5); /* Background color for the profile box */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(252, 251, 251, 0.903); /* Shadow for depth */
+    padding: 10px; /* Increased padding inside the box */
+    text-align: center; /* Center text inside the box */
+    width: 100%; /* Width of the box */
+    max-width: 2000px; /* Maximum width for larger screens */
+    min-height: 30px; /* Minimum height for the box */
+  }
+  .profile-image  {
+    width: 150px; /* Set the width of the profile image */
+    height: 150px; /* Set the height of the profile image */
+    border-radius: 50%; /* Make the image circular */
+    border: 2px solid #fff; /* Optional: Add a border */
+    transition: transform 0.3s; /* Smooth transition for hover effect */
+  }
+  
+  .profile-image:hover {
+    transform: scale(1.1); /* Scale up the image on hover */
+  }
+  
+  .profile-name {
+    font-size: 24px; /* Font size for the name */
+    font-weight: bold; /* Bold font for the name */
+    margin-top: 10px; /* Space above the name */
+    color: #03e2fb; /* Text color for the name */
+  }
+  
+  .profile-email {
+    font-size: 16px; /* Font size for the email */
+    color: gray; /* Color for the email */
+  }
+  
+  .profile-bio {
+    font-size: 14px; /* Font size for the bio */
+    color: #666; /* Color for the bio */
+    margin-top: 5px; /* Space above the bio */
+  }
