@@ -1,16 +1,18 @@
+import React from 'react';
 import { 
   IonButtons,
-    IonContent, 
-    IonHeader, 
-    IonMenuButton, 
-    IonPage, 
-    IonTitle, 
-    IonToolbar,
-    IonList,
-    IonAlert, 
-    IonButton
+  IonContent, 
+  IonHeader, 
+  IonMenuButton, 
+  IonPage, 
+  IonTitle, 
+  IonToolbar,
+  IonLabel,
+  IonAlert, 
+  IonButton
 } from '@ionic/react';
-import { pin, share, trash, call } from 'ionicons/icons';
+import './Feed.css'; // Import the CSS file for styling
+
 const Feed: React.FC = () => {
   return (
     <IonPage>
@@ -19,23 +21,24 @@ const Feed: React.FC = () => {
           <IonButtons slot='start'>
             <IonMenuButton></IonMenuButton>
           </IonButtons>
-          <IonTitle>Alert</IonTitle>
+          <IonTitle>Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
       
-      <IonContent fullscreen color="light">
-      <IonList inset={true}> 
-      </IonList>
+      <IonContent fullscreen className="profile-content">
+        <div className="profile-box">
+          <img 
+            src="https://avatars.githubusercontent.com/u/143623778?v=4" // Replace with your image URL
+            alt="Profile"
+            className="profile-image"
+          />
+          <IonLabel className="profile-name">Jaysash Gundaya</IonLabel>
+          <IonLabel className="profile-email">20221269@nbsc.edu.ph</IonLabel>
+          <IonLabel className="profile-bio">Hi Folks! Welcome to My Profile.</IonLabel>
+        </div>
       </IonContent>
-      <IonButton id="present-alert">Click Me</IonButton>
-      <IonAlert
-        trigger="present-alert"
-        header="A Short Title Is Best"
-        subHeader="A Sub Header Is Optional"
-        message="A message should be a short, complete sentence."
-        buttons={['Action']}
-      ></IonAlert>
     </IonPage>
   );
 };
+
 export default Feed;
