@@ -6,10 +6,6 @@ import {
     IonPage, 
     IonTitle, 
     IonToolbar,
-    IonItem,
-    IonItemOptions,
-    IonItemOption,
-    IonItemSliding,
     IonList,
     IonAlert, 
     IonButton
