@@ -1,4 +1,5 @@
-import { IonAvatar, IonButtons, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar, } from '@ionic/react';
+import { IonAvatar, IonButtons, IonContent, IonHeader, IonImg, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonSearchbar, IonTitle, IonToolbar, IonAlert, 
+    IonButton } from '@ionic/react';
 
 const Search: React.FC = () => {
     return (
@@ -74,8 +75,10 @@ const Search: React.FC = () => {
                         </IonLabel>
                     </IonItem>
                     
-                </IonList>
+               </IonList>
+                
             </IonContent>
+            
         </IonPage>
     );
 };

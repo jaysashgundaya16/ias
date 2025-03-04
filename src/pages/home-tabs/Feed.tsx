@@ -37,6 +37,14 @@ const Feed: React.FC = () => {
           <IonLabel className="profile-bio">Hi Folks! Welcome to My Profile.</IonLabel>
         </div>
       </IonContent>
+      <IonButton id="present-alert">Click Me</IonButton>
+      <IonAlert
+        trigger="present-alert"
+        header="Profile Information"
+        subHeader="User  Details"
+        message="This alert provides information about the user profile. You can view the user's name, email, and a brief bio. If you have any questions or need further assistance, feel free to reach out!"
+        buttons={['OK']}
+      ></IonAlert>
     </IonPage>
   );
 };
