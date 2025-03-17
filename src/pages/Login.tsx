@@ -28,6 +28,10 @@ const Login: React.FC = () => {
     }
   }
 
+  const goToRegister = () => {
+    navigation.push('/register', 'forward', 'replace'); // Navigate to the Register page
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -55,6 +59,9 @@ const Login: React.FC = () => {
         </IonItem>
         <IonButton onClick={doLogin} expand="full" className="ion-margin-top">
           Login
+        </IonButton>
+        <IonButton onClick={goToRegister} expand="full" className="ion-margin-top" fill="clear">
+          DON'T HAVE AN ACCOUNT? REGISTER HERE
         </IonButton>
         <IonAlert
           isOpen={showAlert}
