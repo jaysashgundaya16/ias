@@ -44,6 +44,7 @@ const App: React.FC = () => (
         <Route exact path="/it35-lab" component={Login} />
         <Route exact path="/it35-lab/register" component={Register} />
         <Route path="/it35-lab/app" component={Menu} />
+        <Redirect exact from="/" to="/it35-lab" />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
