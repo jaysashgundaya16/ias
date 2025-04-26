@@ -9,7 +9,7 @@ interface Post {
   user_id: number;
   username: string;
   avatar_url: string;
-  post_content: string;
+  post_content: string; 
   post_created_at: string;
   post_updated_at: string;
 }
@@ -27,7 +27,7 @@ const FeedContainer = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const { data: authData } = await supabase.auth.getUser();
-      if (authData?.user?.email?.endsWith('@nbsc.edu.ph')) {
+      if (authData?.user?.email?.endsWith('@gmail.com')) {
         setUser(authData.user);
         const { data: userData, error } = await supabase
           .from('users')
