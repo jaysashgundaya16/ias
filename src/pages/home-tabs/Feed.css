@@ -8,7 +8,7 @@
   }
   
   .profile-box {
-    background-color: rgb(5, 5, 5); /* Background color for the profile box */
+    
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(252, 251, 251, 0.903); /* Shadow for depth */
     padding: 10px; /* Increased padding inside the box */

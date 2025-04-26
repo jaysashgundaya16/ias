@@ -12,6 +12,7 @@ import {
   IonButton
 } from '@ionic/react';
 import './Feed.css'; // Import the CSS file for styling
+import FeedContainer from '../../components/FeedContainer';
 
 const Feed: React.FC = () => {
   return (
