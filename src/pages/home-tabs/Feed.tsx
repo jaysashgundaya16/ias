@@ -1,51 +1,46 @@
-import React from 'react';
-import { 
+import {
   IonButtons,
-  IonContent, 
-  IonHeader, 
-  IonMenuButton, 
-  IonPage, 
-  IonTitle, 
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
   IonToolbar,
-  IonLabel,
-  IonAlert, 
-  IonButton
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardContent,
+  IonText
 } from '@ionic/react';
-import './Feed.css'; // Import the CSS file for styling
 import FeedContainer from '../../components/FeedContainer';
 
 const Feed: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot='start'>
-            <IonMenuButton></IonMenuButton>
+        <IonToolbar color="dark">
+          <IonButtons slot="start">
+            <IonMenuButton />
           </IonButtons>
-          <IonTitle>Profile</IonTitle>
         </IonToolbar>
       </IonHeader>
-      
-      <IonContent fullscreen className="profile-content">
-        <div className="profile-box">
-          <img 
-            src="https://avatars.githubusercontent.com/u/143623778?v=4" // Replace with your image URL
-            alt="Profile"
-            className="profile-image"
-          />
-          <IonLabel className="profile-name">Jaysash Gundaya</IonLabel>
-          <IonLabel className="profile-email">20221269@nbsc.edu.ph</IonLabel>
-          <IonLabel className="profile-bio">Hi Folks! Welcome to My Profile.</IonLabel>
+
+      <IonContent fullscreen color="light">
+        <div style={{ padding: '16px' }}>
+          <IonCard className="ion-activatable ripple-parent">
+            <IonCardHeader>
+              <IonCardTitle>Welcome to your feed</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+              <IonText color="medium">
+                Here's where you’ll see your latest updates.
+              </IonText>
+            </IonCardContent>
+          </IonCard>
+
+          <FeedContainer />
         </div>
       </IonContent>
-      <IonButton id="present-alert">Click Me</IonButton>
-      <IonAlert
-        trigger="present-alert"
-        header="Profile Information"
-        subHeader="User  Details"
-        message="This alert provides information about the user profile. You can view the user's name, email, and a brief bio. If you have any questions or need further assistance, feel free to reach out!"
-        buttons={['OK']}
-      ></IonAlert>
     </IonPage>
   );
 };
