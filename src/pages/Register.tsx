@@ -24,7 +24,6 @@ import bcrypt from 'bcryptjs';
 
 // Initialize Supabase client
 const supabase = createClient('https://ypmhcyklosieqqfhdsrz.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwbWhjeWtsb3NpZXFxZmhkc3J6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3NzQxNjUsImV4cCI6MjA1ODM1MDE2NX0.FebBjZYn-wTMMCdYrA9F8kcf8vCtQ7tz4yfhVxH9ayg');
-
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
     <IonAlert
@@ -47,38 +46,30 @@ const Register: React.FC = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
-
   const handleOpenVerificationModal = () => {
     if (username === '' || email === '' || password === '' || confirmPassword === '') {
       setAlertMessage('Please fill in all fields.');
       setShowAlert(true);
       return;
     }
-
     if (password !== confirmPassword) {
       setAlertMessage('Passwords do not match.');
       setShowAlert(true);
       return;
     }
-
     setShowVerificationModal(true);
   };
-
   const doRegister = async () => {
     setShowVerificationModal(false);
-
     try {
       // Sign up in Supabase authentication
       const { data, error } = await supabase.auth.signUp({ email, password });
-
       if (error) {
         throw new Error("Account creation failed: " + error.message);
       }
-
       // Hash password before storing in the database
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-
       // Insert user data into 'users' table
       const { error: insertError } = await supabase.from("users").insert([
         {
@@ -87,18 +78,18 @@ const Register: React.FC = () => {
           user_password: hashedPassword,
         },
       ]);
-
       if (insertError) {
         throw new Error("Failed to save user data: " + insertError.message);
       }
-
       setShowSuccessModal(true);
     } catch (err) {
       if (err instanceof Error) {
         setAlertMessage(err.message);
+
       } else {
         setAlertMessage("An unknown error occurred.");
       }
+
       setShowAlert(true);
     }
   };
@@ -142,14 +133,18 @@ const Register: React.FC = () => {
           <IonInput 
             type="password" 
             value={confirmPassword} 
-            onIonChange={e => setConfirmPassword(e.detail.value!)} 
+            onIonChange={e => setConfirmPassword(e
+              .detail.value!)} 
             required 
           />
         </IonItem>
         <IonButton onClick={handleOpenVerificationModal} expand="full" className="ion-margin-top">
           Register
         </IonButton>
-
+        {/* New Button for Sign In */}
+        <IonButton onClick={() => navigation.push('/it35-lab')} expand="full" fill="clear" className="ion-margin-top">
+          Already have an account? Sign in
+        </IonButton>
         {/* Verification Modal */}
         <IonModal isOpen={showVerificationModal} onDidDismiss={() => setShowVerificationModal(false)}>
           <IonContent className="ion-padding">
@@ -159,7 +154,6 @@ const Register: React.FC = () => {
                 <hr />
                 <IonCardSubtitle>Username</IonCardSubtitle>
                 <IonCardTitle>{username}</IonCardTitle>
-
                 <IonCardSubtitle>Email</IonCardSubtitle>
                 <IonCardTitle>{email}</IonCardTitle>
               </IonCardHeader>
@@ -185,7 +179,6 @@ const Register: React.FC = () => {
             </IonButton>
           </IonContent>
         </IonModal>
-
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
