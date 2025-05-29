@@ -1,9 +1,9 @@
 {
-  "name": "ias",
+  "name": "it35-lab",
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://github.com/jaysashgundaya16/ias.git",
+  "homepage": "https://github.com/jaysashgundaya16/it35-lab",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
