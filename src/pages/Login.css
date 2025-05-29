@@ -10,6 +10,4 @@
     background: rgba(0, 0, 0, 0.5); 
     border-radius: 10px; 
   }
-  ion-content {
-    --background: url('https://i.pinimg.com/originals/1d/30/b5/1d30b5a0c298c02edaf2f501b22a6587.gif') no-repeat center center / cover;
-  }
+  

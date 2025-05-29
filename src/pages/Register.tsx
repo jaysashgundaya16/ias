@@ -138,6 +138,10 @@ const Register: React.FC = () => {
             required 
           />
         </IonItem>
+              
+
+
+
         <IonButton onClick={handleOpenVerificationModal} expand="full" className="ion-margin-top">
           Register
         </IonButton>
@@ -164,6 +168,10 @@ const Register: React.FC = () => {
               </div>
             </IonCard>
           </IonContent>
+               
+
+
+
         </IonModal>
 
         {/* Success Modal */}
