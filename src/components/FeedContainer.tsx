@@ -21,8 +21,10 @@ import {
   IonRow,
   IonCol,
   IonSpinner,
+  IonIcon,
 } from '@ionic/react';
 import { createClient } from '@supabase/supabase-js';
+import { addCircleOutline } from 'ionicons/icons'; // Importing an icon
 
 // Replace with your own Supabase URL and anon key
 const SUPABASE_URL = 'https://ypmhcyklosieqqfhdsrz.supabase.co';
@@ -32,7 +34,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface Incident {
   id: number;
-  reporter_name: string; // Ensure these match your Supabase column names
+  reporter_name: string;
   reporter_email: string;
   incident_type: string;
   incident_date: string;
@@ -60,7 +62,7 @@ const IncidentReport: React.FC = () => {
   const loadIncidents = async () => {
     setIsLoading(true);
     const { data, error } = await supabase
-      .from('incidents') // Removed the type parameter here
+      .from('incidents')
       .select('*')
       .order('incident_date', { ascending: false })
       .order('incident_time', { ascending: false });
@@ -69,7 +71,7 @@ const IncidentReport: React.FC = () => {
       setFormMessage(`Failed to load incidents from database: ${error.message}`);
       setIsAlertOpen(true);
     } else if (data) {
-      setIncidents(data as Incident[]); // Cast data to Incident[]
+      setIncidents(data as Incident[]);
     }
     setIsLoading(false);
   };
@@ -111,7 +113,6 @@ const IncidentReport: React.FC = () => {
     } else {
       setFormMessage('Incident submitted successfully!');
       setIsAlertOpen(true);
-      // Reload incidents to update the table with new data
       await loadIncidents();
       resetForm();
     }
@@ -129,7 +130,7 @@ const IncidentReport: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar color="primary">
           <IonTitle>Report a Security Incident</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -195,8 +196,8 @@ const IncidentReport: React.FC = () => {
                   required
                 />
               </IonItem>
-              <IonButton expand="full" type="submit" disabled={isLoading}>
-                {isLoading ? <IonSpinner name="dots" /> : 'Submit'}
+              <IonButton expand="full" type="submit" disabled={isLoading} color="success">
+                {isLoading ? <IonSpinner name="dots" /> : <IonIcon icon={addCircleOutline} />} Submit
               </IonButton>
             </form>
             {formMessage && <IonText color="danger">{formMessage}</IonText>}
