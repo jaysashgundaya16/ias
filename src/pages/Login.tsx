@@ -66,7 +66,7 @@ const Login: React.FC = () => {
             <div className="avatar-glow"></div>
           </IonAvatar>
 
-          <h1 className="Register-title">USER LOGIN</h1>
+          <h1 className="Register-title">ADMIN LOGIN</h1>
           <p style={{ textAlign: 'left', color: '#666', marginBottom: '20px' }}>
             Please login or sign up to continue
           </p>

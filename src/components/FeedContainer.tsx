@@ -24,9 +24,8 @@ import {
   IonIcon,
 } from '@ionic/react';
 import { createClient } from '@supabase/supabase-js';
-import { addCircleOutline } from 'ionicons/icons'; // Importing an icon
+import { addCircleOutline } from 'ionicons/icons'; 
 
-// Replace with your own Supabase URL and anon key
 const SUPABASE_URL = 'https://ypmhcyklosieqqfhdsrz.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwbWhjeWtsb3NpZXFxZmhkc3J6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI3NzQxNjUsImV4cCI6MjA1ODM1MDE2NX0.FebBjZYn-wTMMCdYrA9F8kcf8vCtQ7tz4yfhVxH9ayg'; // Keep this secure
 
@@ -43,6 +42,12 @@ interface Incident {
   status: string;
 }
 
+interface AuthLog {
+  timestamp: string;
+  action: string;
+  status: string;
+}
+
 const IncidentReport: React.FC = () => {
   const [reporterName, setReporterName] = useState('');
   const [reporterEmail, setReporterEmail] = useState('');
@@ -52,6 +57,7 @@ const IncidentReport: React.FC = () => {
   const [incidentDescription, setIncidentDescription] = useState('');
   const [formMessage, setFormMessage] = useState('');
   const [incidents, setIncidents] = useState<Incident[]>([]);
+  const [authLog, setAuthLog] = useState<AuthLog[]>([]); // New state for authentication log
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -70,10 +76,17 @@ const IncidentReport: React.FC = () => {
     if (error) {
       setFormMessage(`Failed to load incidents from database: ${error.message}`);
       setIsAlertOpen(true);
+      logAuthActivity('Load Incidents', 'Failed');
     } else if (data) {
       setIncidents(data as Incident[]);
+      logAuthActivity('Load Incidents', 'Success');
     }
     setIsLoading(false);
+  };
+
+  const logAuthActivity = (action: string, status: string) => {
+    const timestamp = new Date().toLocaleString();
+    setAuthLog(prevLog => [...prevLog, { timestamp, action, status }]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -89,6 +102,7 @@ const IncidentReport: React.FC = () => {
     ) {
       setFormMessage('Please fill out all required fields correctly.');
       setIsAlertOpen(true);
+      logAuthActivity('Submit Incident', 'Failed');
       return;
     }
 
@@ -110,11 +124,33 @@ const IncidentReport: React.FC = () => {
     if (error) {
       setFormMessage(`Failed to submit the incident: ${error.message}`);
       setIsAlertOpen(true);
+      logAuthActivity('Submit Incident', 'Failed');
     } else {
       setFormMessage('Incident submitted successfully!');
       setIsAlertOpen(true);
+      logAuthActivity('Submit Incident', 'Success');
       await loadIncidents();
       resetForm();
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Example registration logic
+    const { data, error } = await supabase.auth.signUp({
+      email: reporterEmail,
+      password: 'your-password', // Replace with actual password input
+    });
+
+    if (error) {
+      setFormMessage(`Registration failed: ${error.message}`);
+      setIsAlertOpen(true);
+      logAuthActivity('User  Registration', 'Failed');
+    } else {
+      setFormMessage('Registration successful!');
+      setIsAlertOpen(true);
+      logAuthActivity('User  Registration', 'Success');
     }
   };
 
@@ -237,6 +273,33 @@ const IncidentReport: React.FC = () => {
               </IonGrid>
             ) : (
               <IonText>No incidents reported yet.</IonText>
+            )}
+          </IonCardContent>
+        </IonCard>
+
+        {/* Authentication Activity Log Table */}
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>Activity Log</IonCardTitle>
+          </IonCardHeader>
+          <IonCardContent>
+            {authLog.length > 0 ? (
+              <IonGrid>
+                <IonRow>
+                  <IonCol><strong>Timestamp</strong></IonCol>
+                  <IonCol><strong>Action</strong></IonCol>
+                  <IonCol><strong>Status</strong></IonCol>
+                </IonRow>
+                {authLog.map((log, index) => (
+                  <IonRow key={index}>
+                    <IonCol>{log.timestamp}</IonCol>
+                    <IonCol>{log.action}</IonCol>
+                    <IonCol>{log.status}</IonCol>
+                  </IonRow>
+                ))}
+              </IonGrid>
+            ) : (
+              <IonText>No authentication activity logged yet.</IonText>
             )}
           </IonCardContent>
         </IonCard>
