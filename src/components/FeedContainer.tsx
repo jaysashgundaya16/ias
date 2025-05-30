@@ -57,7 +57,7 @@ const IncidentReport: React.FC = () => {
   const [incidentDescription, setIncidentDescription] = useState('');
   const [formMessage, setFormMessage] = useState('');
   const [incidents, setIncidents] = useState<Incident[]>([]);
-  const [authLog, setAuthLog] = useState<AuthLog[]>([]); // New state for authentication log
+  const [authLog, setAuthLog] = useState<AuthLog[]>([]);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -78,7 +78,12 @@ const IncidentReport: React.FC = () => {
       setIsAlertOpen(true);
       logAuthActivity('Load Incidents', 'Failed');
     } else if (data) {
-      setIncidents(data as Incident[]);
+      const sortedIncidents = data.sort((a: Incident, b: Incident) => {
+        const dateA = new Date(`${a.incident_date}T${a.incident_time}`);
+        const dateB = new Date(`${b.incident_date}T${b.incident_time}`);
+        return dateB.getTime() - dateA.getTime();
+      });
+      setIncidents(sortedIncidents);
       logAuthActivity('Load Incidents', 'Success');
     }
     setIsLoading(false);
@@ -137,7 +142,6 @@ const IncidentReport: React.FC = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Example registration logic
     const { data, error } = await supabase.auth.signUp({
       email: reporterEmail,
       password: 'your-password', // Replace with actual password input
@@ -249,7 +253,7 @@ const IncidentReport: React.FC = () => {
             {isLoading ? (
               <IonSpinner name="lines" />
             ) : incidents.length > 0 ? (
-              <IonGrid>
+              <IonGrid className="incident-table">
                 <IonRow>
                   <IonCol><strong>Name</strong></IonCol>
                   <IonCol><strong>Email</strong></IonCol>
@@ -260,7 +264,7 @@ const IncidentReport: React.FC = () => {
                   <IonCol><strong>Status</strong></IonCol>
                 </IonRow>
                 {incidents.map((incident) => (
-                  <IonRow key={incident.id}>
+                  <IonRow key={incident.id} className="incident-row">
                     <IonCol>{incident.reporter_name}</IonCol>
                     <IonCol>{incident.reporter_email}</IonCol>
                     <IonCol>{incident.incident_type}</IonCol>
@@ -284,14 +288,14 @@ const IncidentReport: React.FC = () => {
           </IonCardHeader>
           <IonCardContent>
             {authLog.length > 0 ? (
-              <IonGrid>
+              <IonGrid className="activity-log-table">
                 <IonRow>
                   <IonCol><strong>Timestamp</strong></IonCol>
                   <IonCol><strong>Action</strong></IonCol>
                   <IonCol><strong>Status</strong></IonCol>
                 </IonRow>
                 {authLog.map((log, index) => (
-                  <IonRow key={index}>
+                  <IonRow key={index} className="activity-log-row">
                     <IonCol>{log.timestamp}</IonCol>
                     <IonCol>{log.action}</IonCol>
                     <IonCol>{log.status}</IonCol>
@@ -312,6 +316,21 @@ const IncidentReport: React.FC = () => {
           buttons={['OK']}
         />
       </IonContent>
+
+      <style>
+        {`
+          .incident-table, .activity-log-table {
+            background-color: black;
+            color: white;
+          }
+          .incident-row, .activity-log-row {
+            transition: background-color 0.3s;
+          }
+          .incident-row:hover, .activity-log-row:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+        `}
+      </style>
     </IonPage>
   );
 };
