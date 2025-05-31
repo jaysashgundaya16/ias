@@ -89,9 +89,12 @@ const IncidentReport: React.FC = () => {
     setIsLoading(false);
   };
 
-  const logAuthActivity = (action: string, status: string) => {
-    const timestamp = new Date().toLocaleString();
+  const logAuthActivity = async (action: string, status: string) => {
+    const timestamp = new Date().toISOString(); // Get the current timestamp in ISO format
     setAuthLog(prevLog => [...prevLog, { timestamp, action, status }]);
+
+    // Log activity to Supabase
+    await supabase.from('activity_log').insert([{ timestamp, action, status }]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
